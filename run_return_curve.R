@@ -83,7 +83,7 @@ for(j in 1:length(sites)){
   
   for( s in 1:length(scenarios) ){
     
-    # Get sea level rise Monte Carlo Samplesgrey lines are the 17th, 50th, and 83rd percentiles of the GPD parameter uncertainty range.
+    # Get sea level rise Monte Carlo Samples
     fil <- paste( dir,"/LSLproj_MC_",gauge,"_",slab[s],"degree.tsv",sep="")
     if (!file.exists(fil)){
       fil <- paste( dir,"/LSLprojMC_",gauge,"_",slab[s],"degree.tsv",sep="")
@@ -98,11 +98,11 @@ for(j in 1:length(sites)){
       indx = which(years==targ_years[t])
     
     # Future flood curves that include GPD parameter and SLR uncertainty
-      zminusSLR <- mapply(function(x) x - SLRMC[,indx], z) - threshold
+      zminusSLR <- mapply(function(x) x - SLRMC[,indx], z)
     
       ans <- GPDENExceed(zminusSLR-threshold,lambda,-threshold,GPD[,2],GPD[,1],1000)
       curveEff[t,s,] <- apply(matrix(exp(ans),nrow=10000,ncol=1001),2,mean)
-
+      
     # Shift historic flood return curves
     # Median SLR
       slr_q50 <- quantile(SLRMC[,indx],probs=c(.5))
