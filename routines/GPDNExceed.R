@@ -29,9 +29,9 @@ GPDNExceed <- function(z,lambda,MHHW,scale,shape){
 
   exponent <- function(a, pow) (abs(a)^pow)*sign(a)
   
-  z0 <- z
+  z0 <- z # save for later
 
-  z <- pmax(z,0) # > 0 only
+  z <- pmax(z,0) # > 0 only b/c GPD is only defined at or above threshold (i.e., z=0)
   
   if ( shape == 0 ){ 
     
